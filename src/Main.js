@@ -11,15 +11,13 @@ function App() {
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(null);
   const [currentPage, setCurrentPage] = useState(null);
-  const { keyword } = useContext(MainContext);
+  const { keyword, selectedGenres } = useContext(MainContext);
   const [page, setPage] = useState(null);
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState({});
   const handleOpen = () => setOpen(true);
 
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
-
-  console.log(process.env);
 
   const StyledPagination = styled(Pagination)`
     button {
@@ -70,7 +68,22 @@ function App() {
     }
   }, [keyword, page]);
 
-  console.log(currentPage, totalPages);
+  useEffect(() => {
+    Axios.get(
+      "https://api.themoviedb.org/3/discover/movie?api_key=" +
+        API_KEY +
+        "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" +
+        selectedGenres.join(",")
+    )
+      .then((response) => {
+        setCurrentPage(response.data.page);
+        setTotalPages(response.data.total_pages);
+        setData(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [selectedGenres]);
 
   return (
     <div className="App">

@@ -1,12 +1,12 @@
 .movie-card {
   display: flex;
+  box-sizing: content-box;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 12rem;
-  height: 22rem;
+  width: 14rem;
+  height: 24rem;
   padding: 10px;
-  margin: 20px;
   border-radius: 5px;
   background-color: #121212;
   color: #fff;
