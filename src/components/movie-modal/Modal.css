@@ -1,0 +1,34 @@
+.modal-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.modal-exit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-image {
+  width: 30%;
+  height: 100%;
+  background-color: #1212127a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-image img {
+  width: 90%;
+  border-radius: 3px;
+}
+
+.close-btn {
+  color: #000;
+}
+.close-btn:hover {
+  color: #fff;
+}

@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext, useState, useEffect } from "react";
+import Navbar from "./components/navigation/Navbar";
+import Main from "./Main";
+import MainContext from "./context/MainContext";
 
-function App() {
+const App = () => {
+  const [keyword, setKeyword] = useState("");
+  const contextValues = { keyword, setKeyword };
+
+  console.log(keyword);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MainContext.Provider value={contextValues}>
+        <Navbar />
+        <Main />
+      </MainContext.Provider>
     </div>
   );
-}
+};
 
 export default App;
