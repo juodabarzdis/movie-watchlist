@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .suggestion {
@@ -51,18 +52,38 @@
   width: 40%;
 }
 
-.fadeIn {
+/* .fadeIn {
   animation-name: fadeIn;
   animation-duration: 1s;
   animation-fill-mode: both;
-}
+} */
 
 @keyframes fadeIn {
   0% {
     opacity: 0;
   }
+  20% {
+    opacity: 0;
+  }
   100% {
     opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.fadeOut {
+  animation: fadeOut 1s ease-in-out;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

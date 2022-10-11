@@ -38,6 +38,7 @@
 }
 
 .btn {
+  margin-left: 10px;
   padding: 8px 20px;
   border: none;
   font-size: 1rem;
@@ -45,4 +46,24 @@
   outline: none;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.nav-bar-links ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-bar-btn {
+  background-color: #1db954;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 5px;
+}
+
+.nav-bar-btn:hover {
+  background-color: #1ed760;
+  cursor: pointer;
 }

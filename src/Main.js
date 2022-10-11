@@ -12,7 +12,8 @@ function App() {
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(null);
   const [currentPage, setCurrentPage] = useState(null);
-  const { keyword, selectedGenres, page, setPage } = useContext(MainContext);
+  const { keyword, selectedGenres, page, setPage, sele } =
+    useContext(MainContext);
 
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState({});
@@ -93,9 +94,11 @@ function App() {
   return (
     <div className="App">
       <Modal data={modalData} open={open} setOpen={setOpen} />
-      <div className="header">
-        <Suggestions />
-      </div>
+      {selectedGenres.length === 0 && (
+        <div className="header">
+          <Suggestions />
+        </div>
+      )}
       <div className="movies-container">
         {data &&
           data.map(

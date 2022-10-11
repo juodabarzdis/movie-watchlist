@@ -1,11 +1,14 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import Axios from "axios";
 import "./Suggestions.css";
+import MainContext from "../../context/MainContext";
 
 const Suggestions = () => {
+  const { selectedGenres } = useContext(MainContext);
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
   const [data, setData] = useState([]);
   const [suggestionIndex, setSuggestionIndex] = useState(0);
+  const suggestionsRef = useRef(null);
   const imgRef = useRef(null);
   setTimeout(() => {
     if (suggestionIndex <= data.length - 2) {
@@ -13,7 +16,14 @@ const Suggestions = () => {
     } else {
       setSuggestionIndex(0);
     }
-  }, 10000);
+  }, 3000);
+
+  useEffect(() => {
+    imgRef.current.classList.add("fadeIn");
+    setTimeout(() => {
+      imgRef.current.classList.remove("fadeIn");
+    }, 2000);
+  }, [suggestionIndex]);
 
   useEffect(() => {
     Axios.get(
@@ -32,17 +42,20 @@ const Suggestions = () => {
   console.log(data[0]);
 
   return (
-    <div className="suggestions">
+    <div ref={suggestionsRef} className="suggestions">
       <div className="suggestion">
         <div className="suggestion-left">
-          <div className="suggestion-left-image-container">
+          <div ref={imgRef} className="suggestion-left-image-container">
             <img
-              ref={imgRef}
               src={`https://image.tmdb.org/t/p/w1280${data[suggestionIndex]?.backdrop_path}`}
               alt="movie poster"
             />
             <div className="suggestion-left-poster">
+              {/* Below - ensuring the fadeIn effect will start only when the image is fetched */}
               <img
+                style={{
+                  opacity: data[suggestionIndex]?.poster_path ? 1 : 0,
+                }}
                 src={`https://image.tmdb.org/t/p/w500${data[suggestionIndex]?.poster_path}`}
                 alt="movie poster"
               />

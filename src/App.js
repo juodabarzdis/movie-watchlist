@@ -9,6 +9,7 @@ const App = () => {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [page, setPage] = useState(null);
   const [genres, setGenres] = useState([]);
+  const [displayGenres, setDisplayGenres] = useState(false);
   const contextValues = {
     keyword,
     setKeyword,
@@ -18,6 +19,8 @@ const App = () => {
     setPage,
     genres,
     setGenres,
+    displayGenres,
+    setDisplayGenres,
   };
 
   return (

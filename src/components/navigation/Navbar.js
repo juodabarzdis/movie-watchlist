@@ -4,7 +4,8 @@ import "./Navbar.css";
 import { GoSearch } from "react-icons/go";
 
 const Navbar = () => {
-  const { setKeyword } = useContext(MainContext);
+  const { setKeyword, displayGenres, setDisplayGenres } =
+    useContext(MainContext);
   const inputRef = useRef();
 
   const handleSearch = (e) => {
@@ -27,7 +28,14 @@ const Navbar = () => {
       </form>
 
       <div className="nav-bar-links">
-        <div>Genres</div>
+        <ul>
+          <li
+            className="nav-bar-btn"
+            onClick={() => setDisplayGenres(!displayGenres)}
+          >
+            Genres
+          </li>
+        </ul>
       </div>
     </div>
   );
