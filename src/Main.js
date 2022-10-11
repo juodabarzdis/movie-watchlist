@@ -1,18 +1,19 @@
-import "./App.css";
 import { useEffect, useState, useContext } from "react";
-import Axios from "axios";
-import Card from "./components/movie-card/Card";
 import MainContext from "./context/MainContext";
+import "./App.css";
+import Axios from "axios";
 import { Pagination } from "@mui/material";
 import styled from "@emotion/styled";
 import Modal from "./components/movie-modal/Modal";
+import Card from "./components/movie-card/Card";
+import Suggestions from "./components/suggestions/Suggestions";
 
 function App() {
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(null);
   const [currentPage, setCurrentPage] = useState(null);
-  const { keyword, selectedGenres } = useContext(MainContext);
-  const [page, setPage] = useState(null);
+  const { keyword, selectedGenres, page, setPage } = useContext(MainContext);
+
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState({});
   const handleOpen = () => setOpen(true);
@@ -31,7 +32,7 @@ function App() {
       color: #fff;
     }
   `;
-
+  // Popular Movies
   useEffect(() => {
     Axios.get(
       "https://api.themoviedb.org/3/movie/popular?api_key=" +
@@ -48,14 +49,16 @@ function App() {
         console.log(error);
       });
   }, [page, keyword === ""]);
-
+  // Search Movies
   useEffect(() => {
     if (keyword !== "") {
       Axios.get(
         "https://api.themoviedb.org/3/search/movie?api_key=" +
           API_KEY +
           "&query=" +
-          keyword
+          keyword +
+          "&page=" +
+          page
       )
         .then((response) => {
           setData(response.data.results);
@@ -67,13 +70,15 @@ function App() {
         });
     }
   }, [keyword, page]);
-
+  // Genre Movies
   useEffect(() => {
     Axios.get(
       "https://api.themoviedb.org/3/discover/movie?api_key=" +
         API_KEY +
         "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" +
-        selectedGenres.join(",")
+        selectedGenres.join(",") +
+        "&page=" +
+        page
     )
       .then((response) => {
         setCurrentPage(response.data.page);
@@ -88,7 +93,9 @@ function App() {
   return (
     <div className="App">
       <Modal data={modalData} open={open} setOpen={setOpen} />
-
+      <div className="header">
+        <Suggestions />
+      </div>
       <div className="movies-container">
         {data &&
           data.map(

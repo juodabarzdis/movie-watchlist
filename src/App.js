@@ -7,11 +7,17 @@ import Genres from "./components/genres/Genres";
 const App = () => {
   const [keyword, setKeyword] = useState("");
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const [page, setPage] = useState(null);
+  const [genres, setGenres] = useState([]);
   const contextValues = {
     keyword,
     setKeyword,
     selectedGenres,
     setSelectedGenres,
+    page,
+    setPage,
+    genres,
+    setGenres,
   };
 
   return (

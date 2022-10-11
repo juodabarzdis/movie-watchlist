@@ -1,0 +1,156 @@
+.suggestions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.suggestion {
+  margin: 0 20px;
+  max-width: 1560px;
+  height: 560px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  color: #fff;
+  overflow: auto;
+  background-color: rgb(22, 22, 22);
+  border-radius: 10px;
+}
+
+.suggestion-left {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  animation: fadeIn 1s ease-in-out;
+  border-radius: 5px;
+  position: relative;
+}
+.suggestion-left-image-container {
+  width: 100%;
+  height: 100%;
+}
+
+.suggestion-left-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.suggestion-left-poster {
+  position: absolute;
+  bottom: calc(10px + 1vh);
+  left: calc(10px + 1vh);
+  z-index: 150;
+}
+
+.suggestion-left-poster img {
+  width: 40%;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.suggestion-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  padding-left: 1.5rem;
+  font-size: calc(12px + 0.2vw);
+  color: #fff;
+  overflow: auto;
+}
+
+.suggestion-right-details {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+  gap: 0.5rem;
+}
+
+.suggestion-right-details div {
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  background-color: #1212127a;
+  color: #fff;
+  font-weight: 700;
+}
+
+@media (max-width: 1200px) {
+  .suggestion {
+    width: 90vw;
+    height: 70vh;
+    flex-direction: column;
+  }
+  .suggestion-left {
+    width: 100%;
+    height: 60%;
+  }
+
+  .suggestion-left-poster {
+    display: none;
+  }
+
+  .suggestion-right {
+    width: 100%;
+    height: calc(40% + 10vh);
+    padding: 1rem;
+    justify-content: center;
+  }
+}
+@media (max-width: 768px) {
+  .suggestion {
+    display: block;
+    position: relative;
+    height: 40vh;
+  }
+  .suggestion-left {
+    height: 100%;
+    width: 100%;
+  }
+
+  .suggestion-left-poster {
+    display: none;
+  }
+
+  .suggestion-right {
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    top: 60%;
+    left: 0;
+    z-index: 100;
+    background-color: #1212127a;
+    padding: 0;
+    margin: 0;
+  }
+
+  .suggestion-right h2 {
+    margin-left: 1.5rem;
+  }
+
+  .suggestion-right-details {
+    margin-left: 1.5rem;
+  }
+
+  .suggestion-right-overview {
+    display: none;
+  }
+}

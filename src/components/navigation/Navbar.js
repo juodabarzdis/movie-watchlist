@@ -15,7 +15,6 @@ const Navbar = () => {
   return (
     <div className="nav-bar">
       <div className="nav-bar-logo">Logo</div>
-
       <form className="nav-bar-search" onSubmit={handleSearch}>
         <div>
           <input type="text" placeholder="Search" ref={inputRef} />
@@ -27,10 +26,8 @@ const Navbar = () => {
         </div>
       </form>
 
-      <div className="nav-bar__links">
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+      <div className="nav-bar-links">
+        <div>Genres</div>
       </div>
     </div>
   );

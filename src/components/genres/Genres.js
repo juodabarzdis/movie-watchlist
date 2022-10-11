@@ -1,11 +1,11 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import Axios from "axios";
 import MainContext from "../../context/MainContext";
 import "./Genres.css";
 
 const Genres = () => {
-  const [genres, setGenres] = useState([]);
-  const { selectedGenres, setSelectedGenres } = useContext(MainContext);
+  const { genres, setGenres, selectedGenres, setSelectedGenres, setPage } =
+    useContext(MainContext);
 
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
   useEffect(() => {
@@ -24,13 +24,14 @@ const Genres = () => {
 
   const handleAdd = (genre) => {
     setSelectedGenres([...selectedGenres, genre]);
-    console.log(selectedGenres);
+    setPage(1);
   };
 
   const handleRemove = (genre) => {
     selectedGenres.includes(genre) &&
       setSelectedGenres(selectedGenres.filter((g) => g !== genre));
     console.log(selectedGenres);
+    setPage(1);
   };
 
   // const handleGenres = (genre) => {
