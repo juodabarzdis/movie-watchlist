@@ -36,11 +36,8 @@ const Genres = () => {
   const handleRemove = (genre) => {
     selectedGenres.includes(genre) &&
       setSelectedGenres(selectedGenres.filter((g) => g !== genre));
-    console.log(selectedGenres);
     setPage(1);
   };
-
-  console.log(selectedGenres.toString());
 
   return (
     <>

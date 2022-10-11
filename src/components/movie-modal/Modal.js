@@ -12,8 +12,6 @@ export default function BasicModal(props) {
   const handleClose = () => setOpen(false);
   const { data, open, setOpen } = props;
   const { genres } = useContext(MainContext);
-  console.log(data);
-  console.log(genres);
 
   const style = {
     position: "absolute",
@@ -25,7 +23,7 @@ export default function BasicModal(props) {
     bgcolor: "#000",
     border: "2px solid #000",
     boxShadow: 24,
-    background: `linear-gradient(transparent, black 90%), url(https://image.tmdb.org/t/p/original${data.backdrop_path})`,
+    background: `linear-gradient(transparent, black 90%), url(https://image.tmdb.org/t/p/w1280${data.backdrop_path})`,
     backgroundSize: "cover",
   };
 

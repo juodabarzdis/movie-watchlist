@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useContext } from "react";
 import Axios from "axios";
 import "./Suggestions.css";
 import MainContext from "../../context/MainContext";
+import YouTube from "react-youtube";
 
 const Suggestions = () => {
   const { selectedGenres } = useContext(MainContext);
@@ -10,13 +11,24 @@ const Suggestions = () => {
   const [suggestionIndex, setSuggestionIndex] = useState(0);
   const suggestionsRef = useRef(null);
   const imgRef = useRef(null);
+  const [trailer, setTrailer] = useState(null);
+
+  const opts = {
+    height: "520px",
+    width: "100%",
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 0,
+    },
+  };
+
   setTimeout(() => {
     if (suggestionIndex <= data.length - 2) {
       setSuggestionIndex(suggestionIndex + 1);
     } else {
       setSuggestionIndex(0);
     }
-  }, 3000);
+  }, 30000);
 
   useEffect(() => {
     imgRef.current.classList.add("fadeIn");
@@ -29,29 +41,48 @@ const Suggestions = () => {
     Axios.get(
       "https://api.themoviedb.org/3/discover/movie?api_key=" +
         API_KEY +
-        "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_watch_monetization_types=flatrate&vote_count.gte=25000"
+        "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_watch_monetization_types=flatrate&vote_count.gte=20000"
     )
       .then((response) => {
-        console.log(response.data.results);
         setData(response.data.results);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-  console.log(data[0]);
 
+  useEffect(() => {
+    Axios.get(
+      "https://api.themoviedb.org/3/movie/" +
+        data[suggestionIndex]?.id +
+        "/videos?api_key=" +
+        API_KEY +
+        "&language=en-US"
+    )
+      .then((response) => {
+        const results = response.data.results;
+        if (results.length > 0) {
+          results.filter((result) => {
+            if (result.type === "Trailer") {
+              setTrailer(result.key);
+            }
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [suggestionIndex]);
+
+  console.log(trailer);
   return (
     <div ref={suggestionsRef} className="suggestions">
       <div className="suggestion">
         <div className="suggestion-left">
-          <div ref={imgRef} className="suggestion-left-image-container">
-            <img
-              src={`https://image.tmdb.org/t/p/w1280${data[suggestionIndex]?.backdrop_path}`}
-              alt="movie poster"
-            />
-            <div className="suggestion-left-poster">
-              {/* Below - ensuring the fadeIn effect will start only when the image is fetched */}
+          <div ref={imgRef} className="suggestion-left-video-container">
+            <YouTube videoId={trailer} opts={opts} />
+
+            {/* <div className="suggestion-left-poster">
               <img
                 style={{
                   opacity: data[suggestionIndex]?.poster_path ? 1 : 0,
@@ -59,7 +90,7 @@ const Suggestions = () => {
                 src={`https://image.tmdb.org/t/p/w500${data[suggestionIndex]?.poster_path}`}
                 alt="movie poster"
               />
-            </div>
+            </div> */}
           </div>
         </div>
 

@@ -91,9 +91,16 @@ function App() {
       });
   }, [selectedGenres]);
 
+  console.log(data);
+
   return (
     <div className="App">
-      <Modal data={modalData} open={open} setOpen={setOpen} />
+      <Modal
+        data={modalData}
+        open={open}
+        setOpen={setOpen}
+        key={modalData.id}
+      />
       {selectedGenres.length === 0 && (
         <div className="header">
           <Suggestions />
