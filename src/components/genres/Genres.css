@@ -3,7 +3,7 @@
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
   max-width: 1600px;
   height: 100%;

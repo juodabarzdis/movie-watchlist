@@ -11,7 +11,7 @@ const Suggestions = () => {
   const [suggestionIndex, setSuggestionIndex] = useState(0);
   const suggestionsRef = useRef(null);
   const imgRef = useRef(null);
-  const [trailer, setTrailer] = useState(null);
+  const [trailer, setTrailer] = useState(0);
 
   const opts = {
     height: "520px",
@@ -28,7 +28,7 @@ const Suggestions = () => {
     } else {
       setSuggestionIndex(0);
     }
-  }, 30000);
+  }, 6000);
 
   useEffect(() => {
     imgRef.current.classList.add("fadeIn");

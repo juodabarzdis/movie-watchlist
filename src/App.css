@@ -2,6 +2,20 @@ body {
   background-color: #000;
 }
 
+.movies {
+  display: flex;
+  flex-direction: column;
+  max-width: 1600px;
+  margin: 1rem auto;
+  color: #fff;
+}
+
+.movies h3 {
+  text-align: left;
+  margin: 0 20px;
+  font-size: 1.5rem;
+}
+
 .movies-container {
   margin: 1rem auto;
   display: grid;
@@ -10,13 +24,12 @@ body {
   padding: 20px;
   align-items: center;
   justify-content: center;
-  max-width: 1600px;
+  width: 100%;
+  color: #fff;
 }
 
-@media (max-width: 768px) {
-  .movies-container {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
+.movies-container-not-found {
+  margin: 1rem auto;
 }
 
 .pagination-container {
@@ -24,4 +37,40 @@ body {
   justify-content: center;
   margin: 20px 0;
   color: #fff;
+}
+
+.top-rated {
+  margin: 0 auto;
+  max-width: 1600px;
+  color: #fff;
+}
+.top-rated-container {
+  max-width: 1560px;
+  margin: 0 auto;
+}
+
+.top-rated h2 {
+  text-align: left;
+  margin: 20px;
+}
+
+.top-rated-container .movie-card {
+  margin: 10px;
+}
+
+@media (max-width: 768px) {
+  .movies-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .top-rated-container {
+    width: 80%;
+  }
+  .pagination-container {
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  .pagination-container > * {
+    font-size: 0.6rem;
+  }
 }

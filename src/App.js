@@ -7,9 +7,10 @@ import Genres from "./components/genres/Genres";
 const App = () => {
   const [keyword, setKeyword] = useState("");
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const [page, setPage] = useState(null);
+  const [page, setPage] = useState(1);
   const [genres, setGenres] = useState([]);
   const [displayGenres, setDisplayGenres] = useState(false);
+
   const contextValues = {
     keyword,
     setKeyword,

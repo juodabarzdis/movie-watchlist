@@ -1,5 +1,6 @@
 .suggestions {
   width: 100%;
+  margin: 10px 0;
   display: flex;
   justify-content: center;
   animation: fadeIn 1s ease-in-out;

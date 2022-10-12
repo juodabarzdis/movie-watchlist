@@ -7,24 +7,31 @@ import "./Modal.css";
 import { IoCloseSharp } from "react-icons/io5";
 import { useContext } from "react";
 import MainContext from "../../context/MainContext";
+import YouTube from "react-youtube";
 
 export default function BasicModal(props) {
   const handleClose = () => setOpen(false);
-  const { data, open, setOpen } = props;
+  const { data, open, setOpen, trailer } = props;
   const { genres } = useContext(MainContext);
-
+  console.log(trailer);
   const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     maxWidth: "90vw",
-    maxHeight: "70vh",
+    height: "80vh",
     bgcolor: "#000",
-    border: "2px solid #000",
     boxShadow: 24,
-    background: `linear-gradient(transparent, black 90%), url(https://image.tmdb.org/t/p/w1280${data.backdrop_path})`,
-    backgroundSize: "cover",
+  };
+
+  const opts = {
+    height: "500px",
+    width: "100%",
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
   };
 
   return (
@@ -46,13 +53,16 @@ export default function BasicModal(props) {
               <div className="modal-exit">
                 <IoCloseSharp className="close-btn" onClick={handleClose} />
               </div>
-              <div className="modal-image">
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
-                  alt="movie poster"
-                />
+              <div className="modal-trailer">
+                <YouTube videoId={trailer} opts={opts} />
               </div>
-              <div className="modal-info">
+              <div
+                className="modal-info"
+                style={{
+                  background: `linear-gradient(transparent, black 90%), url(https://image.tmdb.org/t/p/w1280${data.backdrop_path})`,
+                  backgroundSize: "cover",
+                }}
+              >
                 <h1>{data.title}</h1>
                 <p>{data.overview}</p>
                 <div className="modal-ratings">
