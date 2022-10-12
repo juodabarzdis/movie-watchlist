@@ -11,6 +11,7 @@ const Genres = () => {
     setSelectedGenres,
     setPage,
     displayGenres,
+    setKeyword,
   } = useContext(MainContext);
 
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
@@ -29,6 +30,7 @@ const Genres = () => {
   }, []);
 
   const handleAdd = (genre) => {
+    setKeyword("");
     setSelectedGenres([...selectedGenres, genre]);
     setPage(1);
   };
